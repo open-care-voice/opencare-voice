@@ -7,8 +7,11 @@ function Navbar() {
 
       <div className="space-x-4">
         <a href="/" className="hover:underline">Home</a>
-        <a href="/reportissue" className="hover:underline">Report Issue</a>
+        <a href="/Reportissue" className="hover:underline">Report Issue</a>
         <a href="/dashboard" className="hover:underline">Dashboard</a>
+        <a href="/login" className="hover:underline">Login</a>
+        <a href="/Signup" className="hover:underline">Signup</a>
+
       </div>
     </nav>
   );

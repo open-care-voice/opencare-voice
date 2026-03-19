@@ -2,7 +2,7 @@ import React from "react";
 import Navbar from "../components/Navbar";
 import { Link } from "react-router-dom";
 
-function Login() {
+function Signup() {
   return (
     <>
       <Navbar />
@@ -12,10 +12,16 @@ function Login() {
         <div className="bg-white p-8 rounded-lg shadow w-[400px]">
 
           <h2 className="text-2xl font-bold mb-6 text-center">
-            Login
+            Create Account
           </h2>
 
           <form className="space-y-4">
+
+            <input
+              type="text"
+              placeholder="Full Name"
+              className="w-full border p-2 rounded"
+            />
 
             <input
               type="email"
@@ -30,15 +36,15 @@ function Login() {
             />
 
             <button className="w-full bg-blue-600 text-white py-2 rounded">
-              Login
+              Sign Up
             </button>
 
           </form>
 
           <p className="text-sm text-center mt-4">
-            Don't have an account?{" "}
-            <Link to="/signup" className="text-blue-600">
-              Sign Up
+            Already have an account?{" "}
+            <Link to="/login" className="text-blue-600">
+              Login
             </Link>
           </p>
 
@@ -49,4 +55,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Signup;
