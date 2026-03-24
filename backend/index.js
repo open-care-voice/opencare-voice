@@ -10,11 +10,14 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-// Optional: test DB
-// db.query("SELECT 1", (err) => {
-//   if (err) throw err;
-//   console.log("DB is working!");
-// });
+const authRoutes = require("./routes/authRoutes");
+app.use("/api/auth", authRoutes);
+app.get("/", (req, res) => {
+  res.send("OpenCare Voice Backend Running");  
+});
+
+
+
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
