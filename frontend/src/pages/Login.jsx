@@ -1,8 +1,38 @@
-import React from "react";
+import React, {useState} from "react";
 import Navbar from "../components/Navbar";
 import { Link } from "react-router-dom";
 
 function Login() {
+  const [email, setEmail] = useState("");
+const [password, setPassword] = useState("");
+
+const handleLogin = async (e) => {
+  e.preventDefault();
+
+  try {
+    const res = await fetch("http://localhost:3000/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    });
+
+    const data = await res.json();
+
+    console.log(data); // 👈 see token in console
+
+    if (data.token) {
+      localStorage.setItem("token", data.token);
+      alert("Login successful");
+    } else {
+      alert(data.message);
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
   return (
     <>
       <Navbar />
@@ -15,17 +45,19 @@ function Login() {
             Login
           </h2>
 
-          <form className="space-y-4">
+          <form onSubmit={handleLogin} className="space-y-4">
 
             <input
               type="email"
-              placeholder="Email"
+              placeholder="Email"  value={email}
+  onChange={(e) => setEmail(e.target.value)}
               className="w-full border p-2 rounded"
             />
 
             <input
               type="password"
-              placeholder="Password"
+              placeholder="Password"  value={password}
+  onChange={(e) => setPassword(e.target.value)}
               className="w-full border p-2 rounded"
             />
 
