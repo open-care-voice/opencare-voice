@@ -92,7 +92,7 @@ function App() {
 
         {/* Footer */}
          <footer className="text-center py-6 text-gray-400 border-t border-gray-700 text-sm">
-          <p>© 2024 OpenCare Voice. All rights reserved.</p>
+          <p>© 2026 OpenCare Voice. All rights reserved.</p>
           <p className="mt-2">Community-driven initiative for transparent healthcare</p>
 
           <div className="flex justify-center gap-6 mt-3 text-xs">
