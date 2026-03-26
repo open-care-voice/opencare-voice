@@ -1,70 +1,90 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Navbar from "../components/Navbar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+
+import { setToken, setUser } from "../utils/auth";
 
 function Login() {
   const [email, setEmail] = useState("");
-const [password, setPassword] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
-const handleLogin = async (e) => {
-  e.preventDefault();
+  const navigate = useNavigate();
 
-  try {
-    const res = await fetch("http://127.0.0.1:3000/api/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    });
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setLoading(true);
 
-    const data = await res.json();
+    try {
+      const res = await fetch("http://127.0.0.1:3000/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
-    console.log(data); 
+      const data = await res.json();
 
-    if (data.token) {
-      localStorage.setItem("token", data.token);
-      alert("Login successful");
-    } else {
-      alert(data.message);
+      console.log("LOGIN RESPONSE:", data);
+
+      if (res.ok && data.token) {
+        // store token + user
+        setToken(data.token);
+        setUser(data.user);
+
+        alert("Login successful");
+
+        // redirect after login
+        navigate("/dashboard");
+      } else {
+        alert(data.message || "Login failed");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Server error. Please try again.");
+    } finally {
+      setLoading(false);
     }
-  } catch (error) {
-    console.error(error);
-  }
-};
+  };
 
   return (
     <>
       <Navbar />
 
       <div className="min-h-screen flex justify-center items-center bg-gray-100">
-
         <div className="bg-white p-8 rounded-lg shadow w-[400px]">
-
           <h2 className="text-2xl font-bold mb-6 text-center">
             Login
           </h2>
 
           <form onSubmit={handleLogin} className="space-y-4">
-
             <input
               type="email"
-              placeholder="Email"  value={email}
-  onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="w-full border p-2 rounded text-black bg-white"
+              required
             />
 
             <input
               type="password"
-              placeholder="Password"  value={password}
-  onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="w-full border p-2 rounded text-black bg-white"
+              required
             />
 
-            <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded">
-              Login
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-blue-600 text-white py-2 rounded"
+            >
+              {loading ? "Logging in..." : "Login"}
             </button>
-
           </form>
 
           <p className="text-sm text-center mt-4">
@@ -73,9 +93,7 @@ const handleLogin = async (e) => {
               Sign Up
             </Link>
           </p>
-
         </div>
-
       </div>
     </>
   );
