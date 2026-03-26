@@ -1,8 +1,4 @@
 {
-<<<<<<< HEAD
-  "dependencies": {
-    "lucide-react": "^1.7.0"
-=======
   "name": "frontend",
   "private": true,
   "version": "0.0.0",
@@ -13,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "lucide-react": "^1.6.0",
+    "lucide-react": "^1.7.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.22.3",
@@ -25,6 +21,5 @@
     "postcss": "^8.5.8",
     "tailwindcss": "^3.4.19",
     "vite": "^5.0.0"
->>>>>>> 9e37e0e (Fixed blank page issue and added icons)
   }
 }
