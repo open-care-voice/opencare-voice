@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Navbar from "../components/Navbar";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom" ;
 
 
-import { setToken, setUser } from "../utils/auth";
+import { setToken, setUser } from "../utils/auth.js";
 
 function Login() {
   const [email, setEmail] = useState("");

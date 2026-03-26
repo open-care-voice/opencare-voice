@@ -1,3 +1,4 @@
+const authRoutes = require("./routes/authRoutes");
 const express = require("express");
 const cors = require("cors");
 const db = require("./config/db"); // import the db connection
@@ -10,11 +11,9 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-// Optional: test DB
-// db.query("SELECT 1", (err) => {
-//   if (err) throw err;
-//   console.log("DB is working!");
-// });
+app.use("/api/auth", authRoutes);
+
+
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
